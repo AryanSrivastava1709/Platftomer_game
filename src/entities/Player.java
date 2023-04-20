@@ -47,16 +47,18 @@ public class Player extends Entity {
 	private boolean attackChecked;
 	private Playing playing;
 
+	private int tileY = 0;
+
 	public Player(float x, float y, int width, int height, Playing playing) {
 		super(x, y, width, height);
 		this.playing = playing;
 		this.state = IDLE;
 		this.maxHealth = 100;
-		this.currentHealth = maxHealth;
+		this.currentHealth = 35;
 		this.walkSpeed = Game.SCALE * 1.0f;
 		loadAnimations();
 		initHitbox(20, 27);
-		 initAttackBox();
+		initAttackBox();
 	}
 
 	public void setSpawn(Point spawn) {
@@ -84,16 +86,18 @@ public class Player extends Entity {
 		if (moving) {
 			checkPotionTouched();
 			checkSpikesTouched();
+			tileY = (int) (hitbox.y / Game.TILES_SIZE);
 		}
 		if (attacking)
 			checkAttack();
-		
+
 		updateAnimationTick();
 		setAnimation();
 	}
 
 	private void checkSpikesTouched() {
 		playing.checkSpikesTouched(this);
+
 	}
 
 	private void checkPotionTouched() {
@@ -252,9 +256,11 @@ public class Player extends Entity {
 		else if (currentHealth >= maxHealth)
 			currentHealth = maxHealth;
 	}
+
 	public void kill() {
-		currentHealth=0;
+		currentHealth = 0;
 	}
+
 	public void changePower(int value) {
 		System.out.println("Added power!");
 	}
@@ -318,6 +324,9 @@ public class Player extends Entity {
 		if (!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
 	}
-
+	
+	public int getTileY() {
+		return tileY;
+	}
 
 }
