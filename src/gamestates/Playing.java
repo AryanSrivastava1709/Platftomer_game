@@ -168,7 +168,9 @@ public class Playing extends State implements Statemethods {
 	public void checkPotionTouched(Rectangle2D.Float hitbox) {
 		objectManager.checkObjectTouched(hitbox);
 	}
-
+	public void checkSpikesTouched(Player p) {
+		objectManager.checkSpikesTouched(p);
+	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (!gameOver)
@@ -280,4 +282,6 @@ public class Playing extends State implements Statemethods {
 	public LevelManager getLevelManager(){
 		return levelManager;
 	}
+
+
 }
