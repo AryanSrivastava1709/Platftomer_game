@@ -11,10 +11,7 @@ import java.util.ArrayList;
 
 import entities.Crabby;
 import main.Game;
-import objects.Cannon;
-import objects.GameContainer;
-import objects.Potion;
-import objects.Spike;
+import objects.*;
 
 public class HelpMethods {
 
@@ -39,6 +36,9 @@ public class HelpMethods {
 		return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
 	}
 
+	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData){
+		return IsSolid(p.getHitbox().x+p.getHitbox().width/2,p.getHitbox().y+p.getHitbox().height/2,lvlData);
+	}
 	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
 		int value = lvlData[yTile][xTile];
 
