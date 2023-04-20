@@ -39,6 +39,7 @@ public class Playing extends State implements Statemethods {
 	private Random rnd = new Random();
 
 	private boolean gameOver;
+	private boolean playerDying;
 	private boolean lvlCompleted;
 
 	public Playing(Game game) {
@@ -91,7 +92,11 @@ public class Playing extends State implements Statemethods {
 			pauseOverlay.update();
 		} else if (lvlCompleted) {
 			levelCompletedOverlay.update();
-		} else if (!gameOver) {
+		}else if(gameOver){
+			//gameOverOverlay.update();
+		}else if(playerDying){
+			player.update();
+		}else{
 			levelManager.update();
 			objectManager.update(levelManager.getCurrentLevel().getLevelData(), player);
 			player.update();
@@ -148,6 +153,7 @@ public class Playing extends State implements Statemethods {
 		gameOver = false;
 		paused = false;
 		lvlCompleted = false;
+		playerDying=false;
 		player.resetAll();
 		enemyManager.resetAllEnemies();
 		objectManager.resetAllObjects();
@@ -286,4 +292,7 @@ public class Playing extends State implements Statemethods {
 		return levelManager;
 	}
 
+	public void setPlayerDying(boolean playerDying) {
+		this.playerDying=playerDying;
+	}
 }
