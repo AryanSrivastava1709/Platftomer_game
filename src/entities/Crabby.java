@@ -12,12 +12,11 @@ import main.Game;
 
 public class Crabby extends Enemy {
 
-
 	private int attackBoxOffsetX;
 
 	public Crabby(float x, float y) {
 		super(x, y, CRABBY_WIDTH, CRABBY_HEIGHT, CRABBY);
-		initHitbox(22 , 19 );
+		initHitbox(22, 19);
 		initAttackBox();
 	}
 
@@ -68,6 +67,7 @@ public class Crabby extends Enemy {
 			}
 		}
 	}
+
 	public int flipX() {
 		if (walkDir == RIGHT)
 			return width;

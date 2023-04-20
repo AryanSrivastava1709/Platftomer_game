@@ -1,19 +1,18 @@
 package entities;
 
 import static utilz.Constants.EnemyConstants.*;
-import static utilz.Constants.*;
 import static utilz.HelpMethods.*;
 
 import java.awt.geom.Rectangle2D;
 
 import static utilz.Constants.Directions.*;
+import static utilz.Constants.*;
 
 import main.Game;
 
 public abstract class Enemy extends Entity {
-	protected int  enemyType;
+	protected int enemyType;
 	protected boolean firstUpdate = true;
-
 	protected int walkDir = LEFT;
 	protected int tileY;
 	protected float attackDistance = Game.TILES_SIZE;
@@ -23,9 +22,10 @@ public abstract class Enemy extends Entity {
 	public Enemy(float x, float y, int width, int height, int enemyType) {
 		super(x, y, width, height);
 		this.enemyType = enemyType;
+
 		maxHealth = GetMaxHealth(enemyType);
 		currentHealth = maxHealth;
-		walkSpeed=Game.SCALE*0.35f;
+		walkSpeed = Game.SCALE * 0.35f;
 	}
 
 	protected void firstUpdateCheck(int[][] lvlData) {
@@ -143,9 +143,6 @@ public abstract class Enemy extends Entity {
 		active = true;
 		airSpeed = 0;
 	}
-
-
-
 
 
 	public boolean isActive() {
