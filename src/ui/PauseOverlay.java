@@ -17,20 +17,17 @@ public class PauseOverlay {
 	private Playing playing;
 	private BufferedImage backgroundImg;
 	private int bgX, bgY, bgW, bgH;
-	private AudioOptions audioOptions ;
+	private AudioOptions audioOptions;
 	private UrmButton menuB, replayB, unpauseB;
-
 
 	public PauseOverlay(Playing playing) {
 		this.playing = playing;
 		loadBackground();
-		audioOptions=playing.getGame().getAudioOptions();
+		audioOptions = playing.getGame().getAudioOptions();
 
 		createUrmButtons();
 
 	}
-
-
 
 	private void createUrmButtons() {
 		int menuX = (int) (313 * Game.SCALE);
@@ -43,8 +40,6 @@ public class PauseOverlay {
 		unpauseB = new UrmButton(unpauseX, bY, URM_SIZE, URM_SIZE, 0);
 	}
 
-
-
 	private void loadBackground() {
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PAUSE_BACKGROUND);
 		bgW = (int) (backgroundImg.getWidth() * Game.SCALE);
@@ -54,23 +49,26 @@ public class PauseOverlay {
 	}
 
 	public void update() {
+
 		menuB.update();
 		replayB.update();
 		unpauseB.update();
+
 		audioOptions.update();
+
 	}
 
 	public void draw(Graphics g) {
 		// Background
 		g.drawImage(backgroundImg, bgX, bgY, bgW, bgH, null);
 
-
-
 		// UrmButtons
 		menuB.draw(g);
 		replayB.draw(g);
 		unpauseB.draw(g);
+
 		audioOptions.draw(g);
+
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -89,7 +87,7 @@ public class PauseOverlay {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		 if (isIn(e, menuB)) {
+		if (isIn(e, menuB)) {
 			if (menuB.isMousePressed()) {
 				Gamestate.state = Gamestate.MENU;
 				playing.unpauseGame();
@@ -102,10 +100,8 @@ public class PauseOverlay {
 		} else if (isIn(e, unpauseB)) {
 			if (unpauseB.isMousePressed())
 				playing.unpauseGame();
-		}else{
-			 audioOptions.mouseReleased(e);
-		 }
-
+		} else
+			audioOptions.mouseReleased(e);
 
 		menuB.resetBools();
 		replayB.resetBools();
@@ -114,13 +110,11 @@ public class PauseOverlay {
 	}
 
 	public void mouseMoved(MouseEvent e) {
-
 		menuB.setMouseOver(false);
 		replayB.setMouseOver(false);
 		unpauseB.setMouseOver(false);
 
-
-		 if (isIn(e, menuB))
+		if (isIn(e, menuB))
 			menuB.setMouseOver(true);
 		else if (isIn(e, replayB))
 			replayB.setMouseOver(true);
@@ -128,7 +122,6 @@ public class PauseOverlay {
 			unpauseB.setMouseOver(true);
 		else
 			audioOptions.mouseMoved(e);
-
 	}
 
 	private boolean isIn(MouseEvent e, PauseButton b) {
